@@ -1,0 +1,14 @@
+name: ci
+on:
+  push:
+  pull_request:
+  merge_group:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: fail when FAIL exists
+        run: |
+          if [ -f FAIL ]; then echo "WDRC-359 deliberate failure: FAIL marker present"; exit 1; fi
+          echo ok
